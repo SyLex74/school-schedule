@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание расписания</title>
+
+    <!-- Подключаем все CSS файлы -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/schedule.css">
+    <link rel="stylesheet" href="css/modal.css">
+
+    <!-- Библиотека для работы с Excel -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <span class="logo-icon">📅</span>
+                    <span class="logo-text">ШкольноеРасписание</span>
+                </div>
+                <div class="nav-links">
+                    <a href="index.html" class="nav-link">Главная</a>
+                    <a href="schedule.html" class="nav-link active">Создать</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Создание расписания</h1>
+                <p class="page-subtitle">Создайте расписание уроков для одного дня</p>
+            </div>
+
+            <div class="day-selection">
+                <h2 class="section-title">1. Выберите день недели</h2>
+                <div class="day-buttons">
+                    <button class="day-btn" data-day="monday">Понедельник</button>
+                    <button class="day-btn" data-day="tuesday">Вторник</button>
+                    <button class="day-btn" data-day="wednesday">Среда</button>
+                    <button class="day-btn" data-day="thursday">Четверг</button>
+                    <button class="day-btn" data-day="friday">Пятница</button>
+                    <button class="day-btn" data-day="saturday">Суббота</button>
+                </div>
+            </div>
+
+            <div id="scheduleArea" class="schedule-area hidden">
+                <div class="area-header">
+                    <h2 id="selectedDayTitle" class="section-title"></h2>
+                    <p class="area-subtitle">Добавьте классы и заполните расписание уроков</p>
+                </div>
+
+                <div id="classesContainer" class="classes-container">
+                    <!-- Классы будут добавляться здесь -->
+                </div>
+
+                <div class="controls">
+                    <button id="addClassBtn" class="btn btn-outline">
+                        <span class="btn-icon">➕</span>
+                        Добавить класс
+                    </button>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="downloadExcelBtn" class="btn btn-primary btn-large" disabled>
+                    <span class="btn-icon">📥</span>
+                    Скачать Excel
+                </button>
+                <button id="clearAllBtn" class="btn btn-secondary">
+                    <span class="btn-icon">🗑️</span>
+                    Очистить всё
+                </button>
+            </div>
+        </div>
+
+        <!-- Модальное окно для выбора предмета -->
+        <div id="subjectModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Выберите предмет</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="search-box">
+                        <input type="text" id="subjectSearch" placeholder="Поиск предмета..." class="search-input">
+                    </div>
+                    <div id="subjectsList" class="items-grid">
+                        <!-- Предметы загружаются через JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно для выбора кабинета -->
+        <div id="classroomModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Выберите кабинет</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="search-box">
+                        <input type="text" id="classroomSearch" placeholder="Поиск кабинета..." class="search-input">
+                    </div>
+                    <div id="classroomsList" class="items-grid">
+                        <!-- Кабинеты загружаются через JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Диалоги будут добавлены динамически через JS -->
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">ШкольноеРасписание © 2026</p>
+                <a href="index.html" class="footer-link">Вернуться на главную</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Подключаем JS модули в правильном порядке -->
+    <script src="js/core/constants.js"></script>
+    <script src="js/managers/classManager.js"></script>
+    <script src="js/managers/conflictManager.js"></script>
+    <script src="js/managers/exportManager.js"></script>
+    <script src="js/ui/uiManager.js"></script>
+    <script src="js/core/scheduleCreator.js"></script>
+    <script src="js/core/main.js"></script>
+</body>
+</html>
